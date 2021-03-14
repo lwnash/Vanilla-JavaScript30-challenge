@@ -8,5 +8,8 @@
 
 我不打算用 30 天来完成这个挑战，只要我能把挑战一一解决就好。
 
+带有 START 字符的文件是需要完成的挑战，带有 FINISHED 字符的文件是完整的代码
+
+
 1. 04 - Array Cardio Day 1
 2. 07 - Array Cardio Day 2

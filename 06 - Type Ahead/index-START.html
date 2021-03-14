@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="search-form">
+      <input type="text" class="search" placeholder="City or State" />
+      <ul class="suggestions">
+        <li>Filter for a city</li>
+        <li>or a state</li>
+      </ul>
+    </form>
+    <script>
+      const endpoint =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+      async function getJson(url) {
+        const response = await fetch(url);
+        return await response.json();
+      }
+
+      const locations = [];
+      getJson(endpoint).then((data) => locations.push(...data));
+      // console.log(locations)
+
+      function findLocations(wordsInput, locations) {
+        return locations.filter((location) => {
+          const regex = new RegExp(wordsInput, "gi");
+          return location.state.match(regex) || location.city.match(regex);
+        });
+      }
+
+      function showLocations() {
+        const matched = findLocations(this.value, locations);
+        const html = matched
+          .map(
+            (location) => `
+          <li>
+            <span class='name'>${location.city} ${location.state}</span>
+            <span class='population'>${location.population}</span>
+          </li>
+        `
+          )
+          .join("");
+
+        suggestions.innerHTML = html;
+      }
+      const search = document.querySelector(".search");
+      const suggestions = document.querySelector(".suggestions");
+
+      search.addEventListener("change", showLocations);
+      search.addEventListener("keyup", showLocations);
+    </script>
+  </body>
+</html>
