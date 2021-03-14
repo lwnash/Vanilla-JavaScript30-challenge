@@ -13,3 +13,4 @@
 
 1. 04 - Array Cardio Day 1
 2. 07 - Array Cardio Day 2
+3. 06 - Type Ahead
